@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+<h1 class="testing">Assalamu Alaikum :)</h1>
+<body>
+<div id="myDIV">
+
+</div>
+
+<script type="text/javascript">
+(function(){
+
+  var members = [
+		{
+		    name: "Ali",
+		    hoby: "reading", 
+		    email: "ali@gmail.com"			
+		},
+		{
+		    name: "Shahbaz",
+		    hoby: "learnig", 
+		    email: "shahbaz@gmail.com"		
+		},
+		{
+		    name: "Saqib",
+		    hoby: "gaming", 
+		    email: "saqib@gmail.com"			
+		},
+		{
+		    name: "Sherry",
+		    hoby: "speeching", 
+		    email: "sherry@gmail.com"			
+		},
+		{
+		    name: "Shahrukh",
+		    hoby: "cooking", 
+		    email: "shahrukh@gmail.com"			
+		},
+		{
+		    name: "Zain",
+		    hoby: "reading", 
+		    email: "zain@gmail.com"			
+		},
+		{
+		    name: "Aman",
+		    hoby: "reading", 
+		    email: "aman@gmail.com"			
+		}
+  ];
+
+  var nameArray = new Array();
+
+  for( var i=0; i < members.length; i++){
+
+      var temp = members[i];
+      var tempName = temp.name;
+
+      nameArray[i] = tempName;      
+  }
+
+  console.log(nameArray);
+  
+  var list = document.createElement('ul');
+  list.className = 'bulk'
+  for( var i=0; i < nameArray.length; i++ ){
+	
+	var item = document.createElement('li');
+
+	item.appendChild(document.createTextNode(nameArray[i]));
+	item.id = nameArray[i];
+	list.appendChild(item);
+	document.getElementById("myDIV").appendChild(list);
+  }
+	var ul = document.getElementsByClassName('bulk')[0];  // Parent
+
+	var isMsgshow = false;
+
+	ul.addEventListener('click', function(e) {
+	    if (e.target.tagName === 'LI'){
+	    	if(isMsgshow){
+				document.getElementById("mesgArea").remove();
+				console.log('in in if');
+	    	}
+
+			isMsgshow = true;
+			
+			var divtag = document.createElement('div');
+			divtag.id = 'mesgArea';
+			// divtag.innerHTML = e.target.id;
+			divtag.style.cssText = "height:100px;width:800px;background:#ddd;";
+
+			document.getElementById("myDIV").appendChild(divtag);
+
+			var messagediv = document.createElement('DIV');
+			messagediv.style.cssText = "background:green; width:780px; padding:10px; margin:0 0 12px 0; color:#fff;";
+			document.getElementById("mesgArea").appendChild(messagediv);
+
+		    var labeltag = document.createElement("LABEL");
+		    labeltag.appendChild(document.createTextNode(e.target.id));
+			document.getElementById("mesgArea").appendChild(labeltag);
+
+			var textmessage = document.createElement('TEXTAREA');
+			document.getElementById("mesgArea").appendChild(textmessage);
+
+			var combolistwrapper = document.createElement('select');
+			
+			for( var i=0; i < nameArray.length; i++ ){
+				var name = nameArray[i];
+				if( name == e.target.id ){ continue;}
+				
+					var combolist = document.createElement('option');
+
+					combolist.appendChild(document.createTextNode(name));
+					combolist.id = name;
+					combolistwrapper.appendChild(combolist);
+
+					document.getElementById("mesgArea").appendChild(combolistwrapper);
+				
+			}
+
+			var sendBtn = document.createElement('input');
+			sendBtn.type = "button";
+			sendBtn.value = "Send";
+			sendBtn.style.cssText = "background:green;color:#fff;"
+			document.getElementById("mesgArea").appendChild(sendBtn);			
+
+	    	// console.log(e.target.id);
+	    	console.log(members[1]);
+			sendBtn.addEventListener('click', function(e) {
+				if( textmessage.value == ""){
+					console.log('textmessage EMPTY');
+					alert('Please type message');
+					textmessage.focus();
+				} else {
+					messagediv.innerHTML = textmessage.value;
+					// members[i].push(var obj = {message: textmessage.value });
+					members[1]['msg'] = textmessage.value;
+					// members[1].push({'messg':"sdsd"});
+					console.log(members[1]);
+				}
+			});
+	    }
+
+	});
+
+}());
+</script>
+</body>
+</html>
